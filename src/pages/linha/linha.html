@@ -1,0 +1,27 @@
+<ion-content>
+    <ion-list>
+
+                 <ion-item>
+                        <ion-searchbar (ionInput)="buscar($event)"></ion-searchbar>
+                        <button ion-button icon-start clear small (click)="upload()">
+                                <ion-icon name="folder"></ion-icon>
+                                <div>Subir Imagem</div>
+                       </button>
+                </ion-item>  
+
+  
+    
+  <ion-item *ngFor="let linha of linhas" (click)="abrirDetalhe(linha)" >
+            <ion-icon name="bus" item-start></ion-icon>
+         <h2>{{ linha.Numero }} - {{ linha.Nome }}</h2>
+           <h6> <ionic3-star-rating 
+            activeIcon = "ios-star"
+            defaultIcon = "ios-star-outline"
+            activeColor = "#488aff" 
+            defaultColor = "#f4f4f4"
+            readonly="false"
+            [rating]="linha.AvaliacaoMedia"></ionic3-star-rating></h6>
+            <p>{{totalOcorrencias(linha.Ocorrencias)}} Ocorrência(s) </p>
+        </ion-item>
+    </ion-list>
+</ion-content>

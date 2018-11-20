@@ -1,0 +1,15 @@
+<ion-header>
+    <ion-navbar>
+    <ion-title>Itinerários de {{ nomeLinhaCompleta}} </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+            <ion-item *ngFor="let horario of horarios">
+                    <h2><strong>{{ horario.HoraBase }} </strong></h2>
+                    <span *ngFor="let base of horario.Saida">{{base}} -</span>
+            </ion-item>
+
+    </ion-list>
+
+</ion-content>

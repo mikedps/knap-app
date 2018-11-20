@@ -1,0 +1,42 @@
+
+<ion-header>
+        <ion-navbar>
+        <ion-title>Detalhes sobre {{ nomeLinhaCompleta}} </ion-title>
+        </ion-navbar>
+    </ion-header>
+<ion-grid>
+        <ion-row>
+            <ion-col col-lg-6>
+                <ion-card>
+                        <img src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-map-madison.png">
+                    
+                        <ion-item>
+                                <ion-icon name="bus" item-start large></ion-icon>
+                                <h2>{{nomeLinhaCompleta }}</h2>
+                                <p>Tipo: <strong>{{ linha.Tipo}}</strong> </p>
+                        </ion-item>
+                        
+                        <ionic3-star-rating 
+                        activeIcon = "ios-star"
+                        defaultIcon = "ios-star-outline"
+                        activeColor = "#488aff" 
+                        defaultColor = "#f4f4f4"
+                        readonly="false"
+                        [rating]="avaliacao">
+                    </ionic3-star-rating>
+
+                        <ion-fab right bottom>
+                                <button ion-fab color="dark">
+                                    <ion-icon name="add"></ion-icon></button>
+                                <ion-fab-list side="left">
+                                  <button ion-fab><ion-icon name="time" (click)="getItinerario(linha)"></ion-icon></button>
+                                  <button ion-fab><ion-icon name="create"(click)="addOcorrencia(linha)"></ion-icon></button>
+                                  <button ion-fab><ion-icon name="star"></ion-icon></button>
+                                 
+                                </ion-fab-list>
+                            </ion-fab>
+                </ion-card>
+            </ion-col>
+     </ion-row>
+
+</ion-grid>
