@@ -2,7 +2,11 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { LinhaProvider } from '../../providers/linha';
 import { LinhaDetalhePage } from '../linha-detalhe/linha-detalhe';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FileOpener }  from '@ionic-native/file-opener';
+import { FilePath } from '@ionic-native/file-path';
+import { Base64 } from '@ionic-native/base64';
+import { CloudVisionProvider} from '../../providers/cloud-vision';
 
 
 @Component({
@@ -14,7 +18,11 @@ export class LinhaPage {
   constructor(private navCtrl: NavController, 
              private linhaProvider: LinhaProvider,
              private navParams : NavParams,
-             private transfer: FileTransfer
+             private fileChooser : FileChooser,
+             private fileOpener : FileOpener,
+             private filePath : FilePath,
+             private base64 : Base64,
+             private cloudVisionProvider : CloudVisionProvider
              ) {}
   
 
@@ -25,25 +33,36 @@ export class LinhaPage {
         this.linhas = result;
       });
   }
-  // full example
-upload() {
+  upload() {
     
-  const fileTransfer: FileTransferObject = this.transfer.create();
+    this.fileChooser.open().then(foto =>{
+      
+      this.base64.encodeFile(foto).then((base64File: string) => {
+        const img = 'data:image/jpeg;base64,' + base64File;
+        console.log(base64File);
+         /* console.log(img);
 
-  let options: FileUploadOptions = {
-     fileKey: 'file',
-     fileName: 'name.jpg',
-     headers: {}
-   }
+        this.cloudVisionProvider.post(img).then(resultado =>{
+          console.log(resultado);
+        
+          this.cloudVisionProvider.tratarRetorno(resultado).then(buscar =>{
+            console.log(buscar);
+            this.linhaProvider.getLinha(buscar).subscribe(linha => {
+              console.log(linha);
+              this.linhas = linha;
+            })
+          })
+        })*/
 
-  fileTransfer.upload('<file path>', '<api endpoint>', options)
-   .then((data) => {
-     // success
-   }, (err) => {
-     // error
-   })
-}
+      }, (err) => {
+        console.log(err);
+      });
 
+    });
+    
+  }
+
+  
   abrirDetalhe(linha){
     this.navCtrl.push(LinhaDetalhePage, { linha });
   }
