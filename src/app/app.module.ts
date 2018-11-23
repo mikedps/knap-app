@@ -15,8 +15,12 @@ import { TipoOcorrenciaProvider}  from '../providers/tipo-ocorrencia';
 import { OcorrenciaProvider } from '../providers/ocorrencia';
 import { ItinerarioProvider} from '../providers/itinerario';
 import { StarRatingModule } from 'ionic3-star-rating';
-import { MapsPage} from '../pages/maps/maps';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { FileOpener }  from '@ionic-native/file-opener';
+import { FilePath } from '@ionic-native/file-path';
+import { Base64 } from '@ionic-native/base64';
+import { CloudVisionProvider} from '../providers/cloud-vision';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -25,13 +29,14 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
     LinhaPage,
     LinhaDetalhePage,
     AddOcorrenciaPage,
-    ItinerarioPage,
-    MapsPage
+    ItinerarioPage
+    
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
+    HttpModule,
     StarRatingModule
   ],
   bootstrap: [IonicApp],
@@ -41,8 +46,8 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
     LinhaPage,
     LinhaDetalhePage,
     AddOcorrenciaPage,
-    ItinerarioPage,
-    MapsPage
+    ItinerarioPage
+    
   ],
   providers: [
     StatusBar,
@@ -52,7 +57,11 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
     TipoOcorrenciaProvider,
     OcorrenciaProvider,
     ItinerarioProvider,
-    FileTransfer
+    CloudVisionProvider,
+    FileChooser,
+    FileOpener,
+    FilePath,
+    Base64
   ]
 })
 export class AppModule {}
