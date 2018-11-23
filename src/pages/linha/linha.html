@@ -2,10 +2,10 @@
     <ion-list>
 
                  <ion-item>
-                        <ion-searchbar (ionInput)="buscar($event)"></ion-searchbar>
-                        <button ion-button icon-start clear small (click)="upload()">
-                                <ion-icon name="folder"></ion-icon>
-                                <div>Subir Imagem</div>
+                        <ion-searchbar (ionInput)="buscar($event)" placeholder="Digite nome ou número da linha de ônibus para buscar"></ion-searchbar>
+                        <button ion-button icon-start clear small (click)="subirImagem()">
+                                <ion-icon name="search"></ion-icon>
+                                <div>Buscar por imagem de ônibus (AI)</div>
                        </button>
                 </ion-item>  
 
@@ -19,8 +19,8 @@
             defaultIcon = "ios-star-outline"
             activeColor = "#488aff" 
             defaultColor = "#f4f4f4"
-            readonly="false"
-            [rating]="linha.AvaliacaoMedia"></ionic3-star-rating></h6>
+            readonly="true"
+            [rating]="avaliacaoMedia"></ionic3-star-rating></h6>
             <p>{{totalOcorrencias(linha.Ocorrencias)}} Ocorrência(s) </p>
         </ion-item>
     </ion-list>

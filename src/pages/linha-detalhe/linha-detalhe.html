@@ -4,12 +4,12 @@
         <ion-title>Detalhes sobre {{ nomeLinhaCompleta}} </ion-title>
         </ion-navbar>
     </ion-header>
-<ion-grid>
-        <ion-row>
-            <ion-col col-lg-6>
+    <ion-content>
+
                 <ion-card>
                         <img src="https://ionicframework.com/dist/preview-app/www/assets/img/advance-card-map-madison.png">
                     
+                        <ion-card-content>
                         <ion-item>
                                 <ion-icon name="bus" item-start large></ion-icon>
                                 <h2>{{nomeLinhaCompleta }}</h2>
@@ -21,22 +21,31 @@
                         defaultIcon = "ios-star-outline"
                         activeColor = "#488aff" 
                         defaultColor = "#f4f4f4"
-                        readonly="false"
+                        readonly="true"
                         [rating]="avaliacao">
                     </ionic3-star-rating>
 
-                        <ion-fab right bottom>
-                                <button ion-fab color="dark">
-                                    <ion-icon name="add"></ion-icon></button>
-                                <ion-fab-list side="left">
-                                  <button ion-fab><ion-icon name="time" (click)="getItinerario(linha)"></ion-icon></button>
-                                  <button ion-fab><ion-icon name="create"(click)="addOcorrencia(linha)"></ion-icon></button>
-                                  <button ion-fab><ion-icon name="star"></ion-icon></button>
-                                 
-                                </ion-fab-list>
-                            </ion-fab>
-                </ion-card>
-            </ion-col>
-     </ion-row>
+                      </ion-card-content>
+             </ion-card>
 
-</ion-grid>
+
+             <ion-fab bottom right edge>
+                    <button ion-fab mini (click)="abrirMenu()"><ion-icon name="add"></ion-icon></button>
+             </ion-fab>
+            
+
+      <ion-item *ngFor="let ocr of linha.Ocorrencias">
+         <ion-card>
+                <ion-card-content>
+                        <ion-card-title>
+                                <h3>{{ocr.Tipo}}</h3>
+                        </ion-card-title>
+
+                        <p>{{ocr.Descricao}}</p>
+              </ion-card-content>
+               
+         </ion-card>
+        </ion-item>
+
+
+    </ion-content>

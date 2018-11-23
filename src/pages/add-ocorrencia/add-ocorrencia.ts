@@ -24,26 +24,33 @@ import { LinhaDetalhePage } from '../../pages/linha-detalhe/linha-detalhe';
 
                   this.linha = navParams.get('linha');
                   this.nomeLinhaCompleta = navParams.get('nomeLinhaCompleta');
-                  console.log(this.linha);
                   this.tipoOcorrenciaProvider.get().subscribe(resultado =>{
                   this.tiposOcorrencia = resultado;
-                  
+                  console.log(this.tiposOcorrencia.Nome);
               });
+
+              
         }
 
         criarOcorrencia(){
               const data = {
                      tipoOcorrenciaID: this.tipoOcorrenciaID, 
                      descricao: this.descricao,
-                     linhaID: this.linha.LinhaID
+                     linhaID: this.linha.LinhaID,
+                     Nome: this.descricao                  
                   };
+                  console.log(data);
 
                   this.ocorrenciaProvider.adicionar(data)
                  .then(o=> {
+                      console.log(this.linha);
+                       this.linha.Ocorrencias.push(data);
+
                          this.mostrarAlerta( 'Ocorrência', 'Ocorrência adicionada com sucesso.');
                          this.navCtrl.push(LinhaDetalhePage, { linha : this.linha })
                   })
                   .catch(err => {
+                        console.log(err);
                         this.mostrarAlerta( 'Ocorrência', 'Houve um erro ao adicionar ocorrência');
                   })
         }

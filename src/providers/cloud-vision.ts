@@ -1,9 +1,8 @@
 import { Component, ChangeDetectorRef, Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions} from '@angular/http';
 import { LoadingController, Loading } from 'ionic-angular';
-
-
 import 'rxjs/add/operator/toPromise';
+import { literal } from '@angular/compiler/src/output/output_ast';
 
 @Injectable()
 export class CloudVisionProvider {
@@ -18,10 +17,10 @@ export class CloudVisionProvider {
               "image":{
                 "content": imagemBase64
               },
-              "features":[
+              "features": [
                 {
                   "type":"TEXT_DETECTION",
-                  "maxResults": 5
+                  "maxResults":5
                 }
               ]
             }
@@ -36,12 +35,42 @@ export class CloudVisionProvider {
     }
  
     tratarRetorno(resultado){
-        return  resultado.textAnnotations[0]
-         .description
-         .replace(',','')
-         .replace('.','')
-         .trim()
-         .substring(0,4)
-        ;
+
+      let anotacoes = resultado.textAnnotations;
+      let indice = 0;
+      for(let l=1; l<= anotacoes.length; l++){
+
+          let palavra = anotacoes[l] == 'undefined' ? '' : anotacoes[l].description;
+          let palavraPotencial = true;
+          let contador = 0;
+
+
+          console.log(palavra);
+
+          if(palavra.length <4){   l++; }
+
+
+            for(let letra=0; letra <= 4; letra++){
+                  
+                  if(!isNaN(palavra[letra]) && palavraPotencial){
+                    contador++;
+                  }
+                  else{
+                    palavraPotencial = false;
+                  }
+              }
+             
+              if(contador >= 4 && palavra.length>=4){
+                 return palavra;                 
+              }
+        }
+
+        
+               return  resultado.textAnnotations[0]
+                .description
+                .replace(',','')
+                .replace('.','')
+                .trim()
+                .substring(0,4);
      }
 }

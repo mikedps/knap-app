@@ -14,6 +14,7 @@ import { LinhaProvider}  from '../providers/linha';
 import { TipoOcorrenciaProvider}  from '../providers/tipo-ocorrencia';
 import { OcorrenciaProvider } from '../providers/ocorrencia';
 import { ItinerarioProvider} from '../providers/itinerario';
+import {  SubirImagemPage } from '../pages/subir-imagem/subir-imagem';
 import { StarRatingModule } from 'ionic3-star-rating';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { FileOpener }  from '@ionic-native/file-opener';
@@ -29,8 +30,8 @@ import { HttpModule } from '@angular/http';
     LinhaPage,
     LinhaDetalhePage,
     AddOcorrenciaPage,
-    ItinerarioPage
-    
+    ItinerarioPage,
+    SubirImagemPage    
   ],
   imports: [
     BrowserModule,
@@ -46,8 +47,8 @@ import { HttpModule } from '@angular/http';
     LinhaPage,
     LinhaDetalhePage,
     AddOcorrenciaPage,
-    ItinerarioPage
-    
+    ItinerarioPage,
+    SubirImagemPage    
   ],
   providers: [
     StatusBar,
